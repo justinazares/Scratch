@@ -1,0 +1,66 @@
+access key ID: AKIAIMDNSPSVRQ2CIBEQ
+secret access key: jOGDg+JVcuTM6gxC4mBHsJ4GooQaoYqR1cTli0TA
+
+username admin@example.com \
+password Passw0rd!
+
+name: notes-app-jzars
+region: US East
+
+Pool ID: us-east-2_dH8ROutK5
+Pool ARN: arn:aws:cognito-idp:us-east-2:773535315342:userpool/us-east-2_dH8ROutK5
+
+App Client ID: 7b05qc244nc0ecfql04c6qc477
+
+Domain: https://notes-app-jzars.auth.us-east-2.amazoncognito.com
+
+noteId: ea7a2b90-a572-11e8-8829-7597e2cb2ffd
+noteId2: 8f26dc20-a577-11e8-bd20-a12993b3db1e
+noteId3: 4406bc60-a57c-11e8-9f73-ff44ed50f320
+
+
+Service Information
+service: notes-app-api
+stage: prod
+region: us-east-2
+stack: notes-app-api-prod
+api keys:
+  None
+endpoints:
+  POST - https://9o7dib7jb5.execute-api.us-east-2.amazonaws.com/prod/notes
+  GET - https://9o7dib7jb5.execute-api.us-east-2.amazonaws.com/prod/notes/{id}
+  GET - https://9o7dib7jb5.execute-api.us-east-2.amazonaws.com/prod/notes
+  PUT - https://9o7dib7jb5.execute-api.us-east-2.amazonaws.com/prod/notes/{id}
+  DELETE - https://9o7dib7jb5.execute-api.us-east-2.amazonaws.com/prod/notes/{id}
+functions:
+  create: notes-app-api-prod-create
+  get: notes-app-api-prod-get
+  list: notes-app-api-prod-list
+  update: notes-app-api-prod-update
+  delete: notes-app-api-prod-delete
+
+API Gateway Region: us-east-2
+API Gateway ID: 9o7dib7jb5
+
+
+// Cognito
+Cognito AuthRole Name: Cognito_notesidentitypoolAuth_Role_JA
+Cognito UnAuthRole Name: Cognito_notesidentitypoolUnauth_Role_JA
+Identity Pool ID: us-east-2:af347042-73a3-47be-862b-d206d5b75649
+
+
+
+//
+npx aws-api-gateway-cli-test 
+--username admin@example.com 
+--password Passw0rd! 
+--user-pool-id us-east-2_dH8ROutK5 						'YOUR_COGNITO_USER_POOL_ID' \
+--app-client-id 7b05qc244nc0ecfql04c6qc477 					'YOUR_COGNITO_APP_CLIENT_ID' \
+--cognito-region us-east-2 							'YOUR_COGNITO_REGION' \
+--identity-pool-id us-east-2:af347042-73a3-47be-862b-d206d5b75649 		'YOUR_IDENTITY_POOL_ID' \
+--invoke-url https://9o7dib7jb5.execute-api.us-east-2.amazonaws.com/prod 	'YOUR_API_GATEWAY_URL' \
+--api-gateway-region us-east-2 							'YOUR_API_GATEWAY_REGION' \
+--path-template /notes 								
+--method POST 
+--body "{\"content\":\"hello world\",\"attachment\":\"hello.jpg\"}"
+
